@@ -22,30 +22,26 @@ function recgerFecha() {
 
 
 
-function formatDateJP(values){
+function formatDateJP(fecha){
   
    //Formato Japonés
-   return  Utilities.formatDate(new Date(values), "GMT+1", "yyyy/MM/dd");
+   return  Utilities.formatDate(new Date(fecha), "GMT+1", "yyyy/MM/dd");
  
   
 }//Fin Función
 
 
-function formatDateEU(values  ) {
+function formatDateEU(fecha  ) {
  
   //Formato Europeo
-  return  Utilities.formatDate(new Date(values), "GMT+1", "dd/MM/yyyy");
+  return  Utilities.formatDate(new Date(fecha), "GMT+1", "dd/MM/yyyy");
  
 }//Fin Función
 
-function formatDateUSA( values) {
+function formatDateUSA( fecha) {
 
-  return Utilities.formatDate(new Date(values), "GMT+1", "MM/dd/yyyy");
+  return Utilities.formatDate(new Date(fecha), "GMT+1", "MM/dd/yyyy");
 
-  
-  
-  
-  
 }//Fin FUnción
 
 
@@ -53,26 +49,46 @@ function formatDateUSA( values) {
 
   
 function formatearFechaOrin(){
+  var fechaFormateada;
   //Recoger el destino de formato
      var sheet = SpreadsheetApp.getActiveSheet();
   var rango = sheet.getRange(7, 1);
   var formatoPais = rango.getValues();
     //Recogemos la fecha 
     var rango = sheet.getRange(7, 2);
-  var datosFecha = rango.getValues();
-  Logger.log(datosFecha);
-  Logger.log(formatoPais);
-  switch(formatoPais){
-      case "USA":
-     datosFecha= formatDateUSA(datosFecha);
-      break;
-     case "EU":
-      datosFecha= formatDateEU(datosFecha);
-      break;
-        case "JP":
-     datosFecha= formatDateJP(datosFecha);
+  var datosFecha = rango.getValue();
+     Logger.log(formatoPais[0]);
+  //cambiamos a string
+  var indexFormatoPais=String(formatoPais[0]);
+  switch(indexFormatoPais){
+    case "USA":
+        fechaFormateada= formatDateUSA(datosFecha);
+  
       break;
       
+    case "EU":
+        fechaFormateada= formatDateUSA(datosFecha);
+      break;
+      
+    case "JP":
+       fechaFormateada=formatDateJP(datosFecha);
+      break;
+      
+      
   }//Fin Switch
-   sheet.getRange(8, 2).setValue(datosFecha);
-}
+  /*
+  if(formatoPais=="USA"){
+   fechaFormateada= formatDateUSA(datosFecha);
+   
+ 
+  }else
+    if(formatoPais=="EU"){
+         fechaFormateada= formatDateEU(datosFecha);
+      
+    }else{
+      fechaFormateada=formatDateJP(datosFecha);
+    }
+*/
+   sheet.getRange(8, 2).setValue(fechaFormateada);
+  
+}//Fin FUncion
