@@ -67,7 +67,7 @@ function formatearFechaOrin(){
       break;
       
     case "EU":
-        fechaFormateada= formatDateUSA(datosFecha);
+        fechaFormateada= formatDateEU(datosFecha);
       break;
       
     case "JP":
