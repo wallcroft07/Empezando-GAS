@@ -1,3 +1,14 @@
+/*
+
+Falta coger varias fechas y convertirlas al formato estandar "JP"
+
+*/
+
+
+
+
+/*
+
 function recgerFecha() {
   var sheet = SpreadsheetApp.getActiveSheet();
   var rango = sheet.getRange(3, 1);
@@ -19,7 +30,7 @@ function recgerFecha() {
   
 }//Fin Función
 
-
+*/
 
 
 function formatDateJP(fecha){
