@@ -5,11 +5,19 @@ Funcionalidad extra, coger una fecha, y pasarlo a los otros formatos restantes
 Posible funcionalidad, recoger en una funcion todo lo repetido en las distintas funct
 
 */
+
+
+/*
+
+Hay que indicarle en que formato está las fechas 
+
+*/
 function formatearRestantesFechas(){
   //Entorno:
    var sheet; var rango; var formatoPais;var rangoFechas; var fechaFormateadaPrimera;
   var fechaFormateadaSegunda; var strFormatoFecha;var iFechas;
   //Algoritmo:
+  //Contamos  las fechas cambiadas, será el doble en el resultado 2fechas Input=4fechas Output
   iFechas=0;
     sheet = SpreadsheetApp.getActiveSheet();
    //Cogemos el formato al que queremos pasar 
