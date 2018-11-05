@@ -1,26 +1,38 @@
-function cogerDatos() {
-    //Accedemos al sheet
-   var sheet = SpreadsheetApp.getActiveSheet();
-   var rango = sheet.getRange(4, 1, 1, sheet.getLastColumn()).getValues();
+/*
+ t 0ª Pedir  la posición donde empieza, para obtener los rangos
+ t 1º Recorrer la primera fila, y si es falta, .Rango 1,1,1,lastColum
+ t 2º Eliminar esa columna, fila+1 hasta  last colum. Con nuevo rango 1+1,1,lastRow,1
+*/
+function recorrerFila(){
+  
+  // Cogemos los datos iniciales, de fila y columna ( filtro númerico )
+  var fila = Browser.inputBox('Fila inicial', Browser.Buttons.OK_CANCEL);
+  while(!parseInt(fila)){
+    var fila = Browser.inputBox('Fila inicial', Browser.Buttons.OK_CANCEL);
+  }//Fin Mientras
+  var columna = Browser.inputBox('Columna inicial sin contar los nombres', Browser.Buttons.OK_CANCEL);
+  while(!parseInt(fila)){
+    var columna = Browser.inputBox('Columna inicial sin contar los nombres', Browser.Buttons.OK_CANCEL);
+  }//Fin Mientras
   
   
-//  var sheet =SpreadsheetApp.getActiveSheet();
- // var rango=sheet.getRange(4, 1, sheet.getLastRow(), 1);
-//sheet.deleteColumns(1);
-// var ss = SpreadsheetApp.getActiveSpreadsheet();
-//var sheet = ss.getSheets()[0];
+  //Accedemos al sheet
+  var sheet = SpreadsheetApp.getActiveSheet();
+  //Rango de cabecera
+  var rango = sheet.getRange(fila, columna, 1, sheet.getLastColumn()).getValues();
+  for(var i=0;i<rango[0].length;i++){
+  //Comparamos si es falta 
+    //comparamos  dos veces por posible tilde
+    if(String(rango[0][i]).toLowerCase().search("limite")==-1&&
+      String(rango[0][i]).toLowerCase().search("límite")==-1){
+      //Accedemos al nuevo rango
+      var rangoEliminar=sheet.getRange(5, i+2,sheet.getLastRow(),1);
+      //Eliminarmos columna seleccionada
+      rangoEliminar.clear();
+    }//Fin Si
+  }//Fin Para
+}//Fin Función
 
-//var range = sheet.getRange(1,1);
-//range.deleteCells(SpreadsheetApp.Dimension.COLUMNS);
-    
-  //A nivel de fila:
-   for(var i=0;i<rango[0].length;i++){
- Logger.log(rango[0][1]);
-     if(String(rango[0][i])=="falta"){
-        Logger.log("ha entrado");
-       var range = sheet.getRange(5,i+1,sheet.getLastRow(),sheet.getLastColumn());
-       range.deleteCells(SpreadsheetApp.Dimension.COLUMNS);
-     }//Fin Si
-  
-   }//Fin Para
-}
+
+
+
